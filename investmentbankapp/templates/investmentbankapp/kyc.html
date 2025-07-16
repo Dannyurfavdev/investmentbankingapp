@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="js">
+   <head>
+      <meta charset="utf-8">
+      <meta name="author" content="ArkVentureAssets.com Developers">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="ArkVentureAssets.com, swap, buy tokens, send and receive crypto, ArkVentureAssets.com, ArkVentureAssets.com.io, ArkVentureAssets.com User, ArkVentureAssets.com Login">
+      <!-- Fav Icon  -->
+      <link rel="icon" type="image/png" href="{% static 'icon.png' %}">
+      <!-- Page Title  -->
+      <title>ArkVentureAssets.com | Panel</title>
+      <!-- StyleSheets  -->
+      <link rel="stylesheet" href="{% static 'dashboardtwo/dashlite.css' %}">
+      <link id="skin-default" rel="stylesheet" href="{% static 'dashboardtwo/theme.css' %}">
+      <link href="{% static 'dashboardtwo/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+      <!--<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   </head>
+   <style>
+      html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      }
+   </style>
+   <body class="nk-body npc-crypto bg-white has-sidebar " id = "darkSwitch">
+      <div class="nk-app-root">
+         <!-- main @s -->
+         <div class="nk-main ">
+            <!-- sidebar @s -->
+            <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
+               <div class="nk-sidebar-element nk-sidebar-head">
+                  <div class="nk-sidebar-brand">
+                     <a href="dashboard" class="logo-link nk-sidebar-logo">
+                     <img class="logo-light logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %} 2x" alt="logo">
+                     <img class="logo-dark logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %}" alt="logo-dark">
+                     <span class="nio-version">ArkVentureAssets.com</span>
+                     </a>
+                  </div>
+                  <div class="nk-menu-trigger mr-n2">
+                     <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="glyphicon glyphicon-menu-down"></em></a>
+                  </div>
+               </div>
+               <!-- .nk-sidebar-element -->
+               <div class="nk-sidebar-element">
+                  <div class="nk-sidebar-body" data-simplebar>
+                     <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-widget nk-sidebar-widget-full d-xl-none pt-0">
+                           <a class="nk-profile-toggle toggle-expand" data-target="sidebarProfile" href="#">
+                              <div class="user-card-wrap">
+                                 <div class="user-card">
+                                    <div class="user-avatar">
+                                       <span>
+                                       {{ request.user.username }}                                                </span>
+                                    </div>
+                                    <div class="user-info">
+                                       <span class="lead-text">{{ request.user.username }} </span>
+                                       <span class="sub-text">{{ request.user.email }} </span>
+                                    </div>
+                                    <div class="user-action">
+                                       <em class="glyphicon glyphicon-menu-down"></em>
+                                    </div>
+                                 </div>
+                              </div>
+                           </a>
+                           <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
+                              <ul class="link-list">
+                                 <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Setting</span></a></li>
+                              </ul>
+                              <ul class="link-list">
+                                 <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-menu">
+                           <!-- Menu -->
+                           <ul class="nk-menu">
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Menu</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'accountStatus' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-dashboard"></em></span>
+                                 <span class="nk-menu-text">Overview</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Invest</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'portfolio' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-folder-open"></em></span>
+                                 <span class="nk-menu-text">Portfolio</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'card' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-credit-card"></em></span>
+                                 <span class="nk-menu-text">Card application</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">History</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'history' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-stats"></em></span>
+                                 <span class="nk-menu-text">Account History</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Request Loan</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'loan' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-briefcase"></em></span>
+                                 <span class="nk-menu-text">Loans & Credit</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Account</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'userProfile' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-user"></em></span>
+                                 <span class="nk-menu-text">Profile</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'myreferals' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                 <span class="nk-menu-text">Referrals</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'kyc' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-certificate"></em></span>
+                                 <span class="nk-menu-text">KYC</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'accountSecurity' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-bullhorn"></em></span>
+                                 <span class="nk-menu-text">Account Security</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Auth</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'logout' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-off"></em></span>
+                                 <span class="nk-menu-text">Log Out</span>
+                                 </a>
+                              </li>
+                           </ul>
+                           <!-- .nk-menu -->
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-footer">
+                           <ul class="nk-menu nk-menu-footer">
+                              <li class="nk-menu-item">
+                                 <a href="" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-help-alt"></em></span>
+                                 <span class="nk-menu-text">Support@ArkVentureAssets.com.com</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item ml-auto">
+                                 <div class="dropup">
+                                    <a href="#" class="nk-menu-link dropdown-indicator has-indicator" data-toggle="dropdown" data-offset="0,10">
+                                    <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                    <span class="nk-menu-text">English</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                       <ul class="language-list">
+                                          <li>
+                                             <div id="google_translate_element"></div>
+                                             <script data-cfasync="false" src=""></script>
+                                             <script type="text/javascript">
+                                                function googleTranslateElementInit() {
+                                                    new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");
+                                                        }
+                                             </script>
+                                             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                           <!-- .nk-footer-menu -->
+                        </div>
+                        <!-- .nk-sidebar-footer -->
+                     </div>
+                     <!-- .nk-sidebar-content -->
+                  </div>
+                  <!-- .nk-sidebar-body -->
+               </div>
+               <!-- .nk-sidebar-element -->
+            </div>
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+               <!-- main header @s -->
+               <div class="nk-header nk-header-fluid nk-header-fixed is-light">
+                  <div class="container-fluid">
+                     <div class="nk-header-wrap">
+                        <div class="nk-menu-trigger d-xl-none ml-n1">
+                           <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="glyphicon glyphicon-menu"></em></a>
+                        </div>
+                        <div class="nk-header-brand d-xl-none">
+                           <a href="dashboard" class="logo-link">
+                           <img class="logo-light logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %} 2x" alt="logo">
+                           <img class="logo-dark logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %}" alt="logo-dark">
+                           <span class="nio-version">ArkVentureAssets.com</span>
+                           </a>
+                        </div>
+                        <div class="nk-header-tools">
+                           <ul class="nk-quick-nav">
+                              <li class="dropdown user-dropdown">
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <div class="user-toggle">
+                                       <div class="user-avatar sm">
+                                          <em class="glyphicon glyphicon-user"></em>
+                                       </div>
+                                       <div class="user-info d-none d-md-block">
+                                          <div class="user-status user-status-verified">Verified account</div>
+                                          <div class="user-name dropdown-indicator">{{ request.user.username }}</div>
+                                       </div>
+                                    </div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                       <div class="user-card">
+                                          <div class="user-avatar">
+                                             <span>
+                                             {{request.user.username}}                                                        </span>
+                                          </div>
+                                          <div class="user-info">
+                                             <span class="lead-text">{{request.user.username}} </span>
+                                             <span class="sub-text">{{request.user.email}} </span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="dropdown-inner user-account-info">
+                                       <h6 class="overline-title-alt">ASPEN-FM Investment Account</h6>
+                                       <div class="user-balance">{{ request.user.client.balance }} <small class="currency currency-btc">USD</small></div>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'userProfile' %}"><em class="glyphicon glyphicon-user"></em><span>Profile</span></a></li>
+                                          <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Settings</span></a></li>
+                                          <li><a class="dark-switch" href="#"><em class="glyphicon glyphicon-adjust"></em><span>Dark Mode</span></a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                              <li class="dropdown notification-dropdown mr-n1">
+                                 <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                    <div class="icon-status icon-status-info"><em class="glyphicon glyphicon-bell"></em></div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-head">
+                                       <span class="sub-title nk-dropdown-title">Notifications</span>
+                                    </div>
+                                    <div class="dropdown-body">
+                                       <div class="nk-notification">
+                                          <div class="nk-notification-item dropdown-inner">
+                                             <div class="nk-notification-icon">
+                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                             </div>
+                                             <div class="nk-notification-content">
+                                                <div class="nk-notification-text">You have created a <span>ArkVentureAssets.com</span> account</div>
+                                                <div class="nk-notification-time">{{request.user.date_joined}}</div>
+                                             </div>
+                                          </div>
+                                          <!-- .dropdown-inner -->
+                                       </div>
+                                    </div>
+                                    <!-- .nk-dropdown-body -->
+                                    <div class="dropdown-foot center">
+                                       <a href="{% url 'notifications' %}">View All</a>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- main header @e -->
+               <div class="nk-content nk-content-fluid">
+                  <div class="container-xl wide-lg">
+                     <div class="kyc-app wide-sm m-auto">
+                        <div class="nk-block-head nk-block-head-lg wide-xs mx-auto">
+                           <div class="nk-block-head-content text-center">
+                              <h2 class="nk-block-title fw-normal">Begin your KYC Verification</h2>
+                              <div class="nk-block-des">
+                                 <p>To comply with regulation each participant will have to go through indentity verification (KYC/AML) to prevent fraud causes. </p>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- nk-block -->
+                        <div class="nk-block">
+                           <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                              <div class="card card-bordered">
+                                 <div class="nk-kycfm">
+                                    <!-- nk-kycfm-content -->
+                                    <div class="nk-kycfm-head">
+                                       <div class="nk-kycfm-count">01</div>
+                                       <div class="nk-kycfm-title">
+                                          <h5 class="title">KYC Document</h5>
+                                          <p class="sub-title">Your ID required for verification</p>
+                                       </div>
+                                    </div>
+                                    <!-- nk-kycfm-head -->
+                                    <div class="nk-kycfm-content">
+                                       <!-- nk-kycfm-control-list -->
+                                       <h6 class="title">To avoid delays when verifying account, Please make sure to *</h6>
+                                       <ul class="list list-sm list-checked">
+                                          <li>Chosen credential must not be expired.</li>
+                                          <li>Document should be in good condition and clearly visible.</li>
+                                          <li>Make sure that there is no light glare on the card (flash).</li>
+                                       </ul>
+                                       <div class="nk-kycfm-upload">
+                                          <h6 class="title nk-kycfm-upload-title">Upload Front Side Here</h6>
+                                          <div class="row align-items-center">
+                                             <div class="col-sm-8">
+                                                <div class="dropzone" id="myAwesomeDropzone">
+                                                   <di3v class="fallback">
+                                                   <input name="frontFile" type="file" required/>
+                                                </div>
+                                             </div>
+                                             <div class="col-sm-4 d-none d-sm-block">
+                                                <div class="mx-md-4">
+                                                   <!--<img src="assets/dashboard/images/icons/id-front.svg" alt="ID Front"> -->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- nk-kycfm-upload -->
+                                       <div class="nk-kycfm-upload">
+                                          <h6 class="title nk-kycfm-upload-title">Upload Back Side Here </h6>
+                                          <div class="row align-items-center">
+                                             <div class="col-sm-8">
+                                                <div class="dropzone" id="myAwesomeDropzone">
+                                                   <di3v class="fallback">
+                                                   <input name="backFile" type="file" required/>
+                                                </div>
+                                             </div>
+                                             <div class="col-sm-4 d-none d-sm-block">
+                                                <div class="mx-md-4">
+                                                   <!--<img src="assets/dashboard/images/icons/id-back.svg" alt="ID Back">-->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- nk-kycfm-upload -->
+                                    </div>
+                                    <!-- nk-kycfm-content -->
+                                    <div class="nk-kycfm-footer">
+                                       <div class="form-group">
+                                          <div class="custom-control custom-control-xs custom-checkbox">
+                                             <input type="checkbox" class="custom-control-input" id="tc-agree" required>
+                                             <label class="custom-control-label" for="tc-agree">I Have Read The <a href="terms" target="_blank">Terms Of Condition</a> And <a href="privacy" target="_blank">Privacy Policy</a></label>
+                                          </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <div class="custom-control custom-control-xs custom-checkbox">
+                                             <input type="checkbox" class="custom-control-input" id="info-assure" required>
+                                             <label class="custom-control-label" for="info-assure">All The Personal Information I Have Entered Is Correct.</label>
+                                          </div>
+                                       </div>
+                                       <div class="nk-kycfm-action pt-2">
+                                          <button type="button" class="btn btn-lg btn-block btn-success" disabled>Submit</button>                                                   
+                                       </div>
+                                    </div>
+                                    <!-- nk-kycfm-footer -->
+                                 </div>
+                                 <!-- nk-kycfm -->
+                              </div>
+                              <!-- .card -->
+                           </form>
+                        </div>
+                     </div>
+                     <!-- nk-block -->
+                  </div>
+               </div>
+               <!-- footer @s -->
+               <div class="nk-footer nk-footer-fluid">
+                  <div class="container-fluid">
+                     <div class="nk-footer-wrap">
+                        <div class="nk-footer-copyright"> &copy; 2023 ArkVentureAssets.com. All rights reserved
+                        </div>
+                        <div class="nk-footer-links">
+                           <ul class="nav nav-sm">
+                              <li class="nav-item"><a class="nav-link" href="{% url 'terms' %}" target="_blank">Terms</a></li>
+                              <li class="nav-item"><a class="nav-link" href="{% url 'privacy' %}" target="_blank">Privacy</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- footer @e -->
+            </div>
+         </div>
+      </div>
+      <script>
+         function engageConversion() {
+                 var cryptoSelect = document.getElementById("cryptoSelect");
+                 var usdAmt = document.getElementById('usdAmount').value;
+                 var cryptoVal = document.getElementById('cryptoValue');
+                             
+                 if(document.getElementById("cryptoSelect").value == "btc"){
+                                     var curRate = 36900;
+                 }else if(document.getElementById("cryptoSelect").value == "eth"){
+                                     var curRate = 2020;
+                 }else if(document.getElementById("cryptoSelect").value == "bch"){
+                                     var curRate = 228.32;
+                 }else if(document.getElementById("cryptoSelect").value == "bnb"){
+                                     var curRate = 230;
+                 }else if(document.getElementById("cryptoSelect").value == "usdt"){
+                                     var curRate = 1.0004;
+                 }else{
+                     var curRate = 0;
+                 } 
+                 
+                 var vResult = usdAmt / curRate;
+                 var roundedFig = vResult.toFixed(4);
+                 document.getElementById('cryptoValue').value = roundedFig;
+                             
+         }
+             
+          
+      </script>
+      <script>
+         if(localStorage.getItem('isDarkMode') === 'enabled'){
+           
+             document.getElementById('darkSwitch').classList.add('dark-mode');
+         }
+      </script>
+      <script src="{% static 'dashboardtwo/dropzone.min.js' %}"></script>
+
+      <script>
+         $(document).ready(function () {
+           $("#recBtn").click(function (e) {
+             e.preventDefault();
+             var cryptoType = $("#cryptoType").val();
+             
+             $.ajax
+               ({
+                 type: "POST",
+                 url: "Main/generateAdd",
+                 data: { "cryptoType": cryptoType },
+                 success: function (data) {
+                   $(".currentInfo").html(data);
+                   $("#receiveForm")[0].reset();
+                 }
+               });
+               
+           });
+         });
+      </script>
+      <script>
+         function updateSpend(){
+         var tester = Math.random();
+          $.ajax({
+           url: "Main/updateSpendRest",
+           type: "POST",
+           success: function(data){
+            //alert(data);
+           },
+           complete:function(data){
+            setTimeout(updateSpend,25000);
+           }
+          });
+         }
+         
+         $(document).ready(function(){
+          setTimeout(updateSpend,25000);
+         });
+         
+      </script>
+      <script src="{% static 'dashboardtwo/bundle.js' %}"></script>
+      <script src="{% static 'dashboardtwo/scripts.js' %}"></script>
+      <script src="https://www.cryptohopper.com/widgets/js/script"></script>
+   </body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="js">
+   <head>
+      <meta charset="utf-8">
+      <meta name="author" content="Ark Venture Assets Developers">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Ark Venture Assets, swap, buy tokens, send and receive Stocks, Ark Venture Assets, ArkVentureAssets.com, Ark Venture Assets User, Ark Venture Assets Login">
+      <!-- Fav Icon  -->
+      <link rel="icon" type="image/png" href="{% static 'lionhead.png' %}">
+      <!-- Page Title  -->
+      <title>Ark Venture Assets | Panel</title>
+      <!-- StyleSheets  -->
+      <link rel="stylesheet" href="{% static 'dashboardtwo/dashlite.css' %}">
+      <link id="skin-default" rel="stylesheet" href="{% static 'dashboardtwo/theme.css' %}">
+      <link href="{% static 'dashboardtwo/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+      <!--<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   </head>
+   <body class="nk-body npc-Stocks bg-white has-sidebar " id = "darkSwitch">
+      <div class="nk-app-root">
+         <!-- main @s -->
+         <div class="nk-main ">
+            <!-- sidebar @s -->
+            <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
+               <div class="nk-sidebar-element nk-sidebar-head">
+                  <div class="nk-sidebar-brand">
+                     <a href="{% url 'dashboard' %}" class="logo-link nk-sidebar-logo">
+                         <h3 style="color: #000000 !important; font-weight: bold !important;">ARKVENTUREASSETS</h3>
+                     <span class="nio-version">Ark Venture Assets</span>
+                     </a>
+                  </div>
+                  <div class="nk-menu-trigger mr-n2">
+                     <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="glyphicon glyphicon-th-large"></em></a>
+                  </div>
+               </div>
+               <!-- .nk-sidebar-element -->
+               <div class="nk-sidebar-element">
+                  <div class="nk-sidebar-body" data-simplebar>
+                     <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-widget nk-sidebar-widget-full d-xl-none pt-0">
+                           <a class="nk-profile-toggle toggle-expand" data-target="sidebarProfile" href="#">
+                              <div class="user-card-wrap">
+                                 <div class="user-card">
+                                    <div class="user-avatar">
+                                       <span>
+                                       {{ request.user.username }}                                                </span>
+                                    </div>
+                                    <div class="user-info">
+                                       <span class="lead-text">{{ request.user.username }} </span>
+                                       <span class="sub-text">{{ request.user.email }} </span>
+                                    </div>
+                                    <div class="user-action">
+                                       <em class="glyphicon glyphicon-menu-down"></em>
+                                    </div>
+                                 </div>
+                              </div>
+                           </a>
+                           <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
+                              <ul class="user-account-links">
+                              </ul>
+                              <ul class="link-list">
+                                 <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Setting</span></a></li>
+                              </ul>
+                              <ul class="link-list">
+                                 <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-menu">
+                           <!-- Menu -->
+                           <ul class="nk-menu">
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Menu</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'dashboard' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-dashboard"></em></span>
+                                 <span class="nk-menu-text">Account Overview</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Transact</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'packageOptions' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-credit-card"></em></span>
+                                 <span class="nk-menu-text">Package Options</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Request Loan</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'loan' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-briefcase"></em></span>
+                                 <span class="nk-menu-text">Loans & Credit</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">History</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'history' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-cloud"></em></span>
+                                 <span class="nk-menu-text">Account History</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'myreferals' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                 <span class="nk-menu-text">Referrals</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="settings" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-cog"></em></span>
+                                 <span class="nk-menu-text">Settings</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Exit</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'logout' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-off"></em></span>
+                                 <span class="nk-menu-text">Log Out</span>
+                                 </a>
+                              </li>
+                           </ul>
+                           <!-- .nk-menu -->
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-footer">
+                           <ul class="nk-menu nk-menu-footer">
+                              <li class="nk-menu-item">
+                                 <a href="" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-help-alt"></em></span>
+                                 <span class="nk-menu-text">Support@ArkVentureAssets.com</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item ml-auto">
+                                 <div class="dropup">
+                                    <a href="#" class="nk-menu-link dropdown-indicator has-indicator" data-toggle="dropdown" data-offset="0,10">
+                                    <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                    <span class="nk-menu-text">English</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                       <ul class="language-list">
+                                          <li>
+                                             <div id="google_translate_element"></div>
+                                             <script data-cfasync="false" src=""></script>
+                                             <script type="text/javascript">
+                                                function googleTranslateElementInit() {
+                                                    new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");
+                                                        }
+                                             </script>
+                                             <script type="text/javascript" src="/static/translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                           <!-- .nk-footer-menu -->
+                        </div>
+                        <!-- .nk-sidebar-footer -->
+                     </div>
+                     <!-- .nk-sidebar-content -->
+                  </div>
+                  <!-- .nk-sidebar-body -->
+               </div>
+               <!-- .nk-sidebar-element -->
+            </div>
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+               <!-- main header @s -->
+               <div class="nk-header nk-header-fluid nk-header-fixed is-light">
+                  <div class="container-fluid">
+                     <div class="nk-header-wrap">
+                        <div class="nk-menu-trigger d-xl-none ml-n1">
+                           <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="glyphicon glyphicon-th-large"></em></a>
+                        </div>
+                        <div class="nk-header-brand d-xl-none">
+                           <a href="{% url 'dashboard' %}" class="logo-link">
+                               <h3 style="color: #000000 !important; font-weight: bold !important;">ARKVENTUREASSETS</h3>
+                           <span class="nio-version">Ark Venture Assets</span>
+                           </a>
+                        </div>
+                        <div class="nk-header-tools">
+                           <ul class="nk-quick-nav">
+                              <li class="dropdown user-dropdown">
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <div class="user-toggle">
+                                       <div class="user-avatar sm">
+                                          <em class="glyphicon glyphicon-user"></em>
+                                       </div>
+                                       <div class="user-info d-none d-md-block">
+                                          <div class="user-status user-status-verified">Verified account</div>
+                                          <div class="user-name dropdown-indicator">{{ request.user.username }}</div>
+                                       </div>
+                                    </div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                       <div class="user-card">
+                                          <div class="user-avatar">
+                                             <span>
+                                             {{request.user.username}}                                                        </span>
+                                          </div>
+                                          <div class="user-info">
+                                             <span class="lead-text">{{request.user.username}} </span>
+                                             <span class="sub-text">{{request.user.email}} </span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="dropdown-inner user-account-info">
+                                       <h6 class="overline-title-alt">ArkVentureAssets.com Investment Account</h6>
+                                       <div class="user-balance">{{ request.user.client.balance }} <small class="currency currency-btc">USD</small></div>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-user"></em><span>Profile</span></a></li>
+                                          <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Settings</span></a></li>
+                                          <li><a class="dark-switch" href="#"><em class="glyphicon glyphicon-adjust"></em><span>Dark Mode</span></a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                              <li class="dropdown notification-dropdown mr-n1">
+                                 <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                    <div class="icon-status icon-status-info"><em class="glyphicon glyphicon-bell"></em></div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-head">
+                                       <span class="sub-title nk-dropdown-title">Notifications</span>
+                                    </div>
+                                    <div class="dropdown-body">
+                                       <div class="nk-notification">
+                                          <div class="nk-notification-item dropdown-inner">
+                                             <div class="nk-notification-icon">
+                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                             </div>
+                                             <div class="nk-notification-content">
+                                                <div class="nk-notification-text">You have created a <span>Ark Venture Assets</span> account</div>
+                                                <div class="nk-notification-time">{{request.user.date_joined}}</div>
+                                             </div>
+                                          </div>
+                                          <!-- .dropdown-inner -->
+                                       </div>
+                                    </div>
+                                    <!-- .nk-dropdown-body -->
+                                    <div class="dropdown-foot center">
+                                       <a href="{% url 'notifications' %}">View All</a>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- main header @e -->
+               <div class="nk-content ">
+                  <div class="container-fluid">
+                     <div class="nk-content-inner">
+                        <div class="nk-content-body">
+                           <div class="nk-block-head nk-block-head-sm">
+                              <div class="nk-block-between">
+                                 <div class="nk-block-head-content">
+                                    <h3 class="nk-block-title page-title">View your referrals below</h3>
+                                    <div class="nk-block-des text-soft">
+                                       <p>Enjoy your investment journey with Ark Venture Assets.</p>
+                                    </div>
+                                 </div>
+                                 <div class="nk-block-head-content">
+                                    <div class="toggle-wrap nk-block-tools-toggle">
+                                       <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu">
+                                       <em class="icon ni ni-more-v"></em></a>
+                                       <div class="toggle-expand-content" data-content="pageMenu">
+                                          <ul class="nk-block-tools g-3">
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="nk-block">
+                              <div class="row g-gs">
+
+                              <div class="col-md-6">
+                                 <div class="card-head">
+                                    <div class="card-title  mb-0">
+                                       <h5 class="title">Recent Transactions</h5>
+                                    </div>
+                                    <div class="card-tools">
+                                       <ul class="card-tools-nav">
+                                          <li class="active"><a href="{% url 'history' %}">Tap To View All</a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                                 <!-- .card-head -->
+                                 <div class="tranx-list card card-bordered">
+                                    {% if ref_info %}
+                                    {% for i in ref_info %}
+                                    <div class="tranx-item">
+                                       <div class="tranx-col">
+                                          <div class="tranx-info">
+                                             <div class="tranx-data">
+                                                <div class="tranx-label">
+                                                   <p>{{ i.first_name }}  {{i.email_address}}</p>
+                                                   <em class="tranx-icon sm glyphicon glyphicon-certificate"></em>
+                                                </div>
+                                                <div class="tranx-date">Date: {{i.created}}</div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="tranx-col">
+                                          <!--
+                                          <div class="tranx-amount">
+                                             <div class="number">Status: {{ i.status }} </div>
+                                             <div class="number-sm">ID: {{ i.transaction_id }}</div>
+                                          </div>
+                                       -->
+                                       </div>
+                                    </div>
+
+                                    {% endfor %}
+                                    {% else %}
+                                    <h4>You have not referred anybody yet.</h4>
+                                    {% endif %}
+
+
+                                 </div>
+                                 <!-- .tranx-list -->
+                              </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- footer @s -->
+               <div class="nk-footer nk-footer-fluid">
+                  <div class="container-fluid">
+                     <div class="nk-footer-wrap">
+                        <div class="nk-footer-copyright"> &copy; 2023 Ark Venture Assets. All rights reserved
+                        </div>
+                        <div class="nk-footer-links">
+                           <ul class="nav nav-sm">
+                              <li class="nav-item"><a class="nav-link" href="{% url 'terms' %}" target="_blank">Terms</a></li>
+                              <li class="nav-item"><a class="nav-link" href="{% url 'privacy' %}" target="_blank">Privacy</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- footer @e -->
+            </div>
+         </div>
+      </div>
+      <script>
+         function engageConversion() {
+                 var StocksSelect = document.getElementById("StocksSelect");
+                 var usdAmt = document.getElementById('usdAmount').value;
+                 var StocksVal = document.getElementById('StocksValue');
+
+                 if(document.getElementById("StocksSelect").value == "btc"){
+                                     var curRate = 37700;
+                 }else if(document.getElementById("StocksSelect").value == "eth"){
+                                     var curRate = 2103.01;
+                 }else if(document.getElementById("StocksSelect").value == "bch"){
+                                     var curRate = 226;
+                 }else if(document.getElementById("StocksSelect").value == "bnb"){
+                                     var curRate = 235;
+                 }else if(document.getElementById("StocksSelect").value == "usdt"){
+                                     var curRate = 1.0002;
+                 }else{
+                     var curRate = 0;
+                 }
+
+                 var vResult = usdAmt / curRate;
+                 var roundedFig = vResult.toFixed(4);
+                 document.getElementById('StocksValue').value = roundedFig;
+
+         }
+
+
+      </script>
+      <script>
+         if(localStorage.getItem('isDarkMode') === 'enabled'){
+
+             document.getElementById('darkSwitch').classList.add('dark-mode');
+         }
+      </script>
+      <script>
+         $(document).ready(function () {
+           $("#recBtn").click(function (e) {
+             e.preventDefault();
+             var StocksType = $("#StocksType").val();
+
+             $.ajax
+               ({
+                 type: "POST",
+                 url: "Main/generateAdd",
+                 data: { "StocksType": StocksType },
+                 success: function (data) {
+                   $(".currentInfo").html(data);
+                   $("#receiveForm")[0].reset();
+                 }
+               });
+
+           });
+         });
+      </script>
+      <script src="{% static 'dashboardtwo/bundle.js' %}"></script>
+      <script src="{% static 'dashboardtwo/scripts.js' %}"></script>
+      <script src="https://www.Stockshopper.com/widgets/js/script"></script>
+   </body>
+</html>

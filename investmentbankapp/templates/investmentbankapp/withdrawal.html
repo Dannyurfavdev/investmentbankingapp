@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="js">
+   <head>
+      <meta charset="utf-8">
+      <meta name="author" content="Ark Venture Assets Developers">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Ark Venture Assets, swap, buy tokens, send and receive crypto, Ark Venture Assets, ArkVentureAssets.com, Ark Venture Assets User, Ark Venture Assets Login">
+      <!-- Fav Icon  -->
+      <link rel="icon" type="image/png" href="{% static 'icon.png' %}">
+      <!-- Page Title  -->
+      <title>Ark Venture Assets | Panel</title>
+      <!-- StyleSheets  -->
+      <link rel="stylesheet" href="{% static 'dashboardtwo/dashlite.css' %}">
+      <link id="skin-default" rel="stylesheet" href="{% static 'dashboardtwo/theme.css' %}">
+      <link href="{% static 'dashboardtwo/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+      <!--<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   </head>
+   <body class="nk-body npc-crypto bg-white has-sidebar " id = "darkSwitch">
+      <div class="nk-app-root">
+         <!-- main @s -->
+         <div class="nk-main ">
+            <!-- sidebar @s -->
+            <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
+               <div class="nk-sidebar-element nk-sidebar-head">
+                  <div class="nk-sidebar-brand">
+                     <a href="dashboard" class="logo-link nk-sidebar-logo">
+                     <img class="logo-light logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %} 2x" alt="logo">
+                     <img class="logo-dark logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %}" alt="logo-dark">
+                     <span class="nio-version">Ark Venture Assets</span>
+                     </a>
+                  </div>
+                  <div class="nk-menu-trigger mr-n2">
+                     <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="glyphicon glyphicon-menu-down"></em></a>
+                  </div>
+               </div>
+               <!-- .nk-sidebar-element -->
+               <div class="nk-sidebar-element">
+                  <div class="nk-sidebar-body" data-simplebar>
+                     <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-widget nk-sidebar-widget-full d-xl-none pt-0">
+                           <a class="nk-profile-toggle toggle-expand" data-target="sidebarProfile" href="#">
+                              <div class="user-card-wrap">
+                                 <div class="user-card">
+                                    <div class="user-avatar">
+                                       <span>
+                                       {{ request.user.username }}                                                </span>
+                                    </div>
+                                    <div class="user-info">
+                                       <span class="lead-text">{{ request.user.username }} </span>
+                                       <span class="sub-text">{{ request.user.email }} </span>
+                                    </div>
+                                    <div class="user-action">
+                                       <em class="glyphicon glyphicon-menu-down"></em>
+                                    </div>
+                                 </div>
+                              </div>
+                           </a>
+                           <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
+                              <ul class="user-account-links">
+                                 <li><a href="#" data-toggle="modal" data-target="#receiveFunds" class="link"><span>Deposit</span> <em class="glyphicon glyphicon-credit-card"></em></a></li>
+                                 <li><a href="#" data-toggle="modal" data-target="#sendFunds" class="link"><span>Transfer</span> <em class="glyphicon glyphicon-transfer"></em></a></li>
+                              </ul>
+                              <ul class="link-list">
+                                 <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Setting</span></a></li>
+                              </ul>
+                              <ul class="link-list">
+                                 <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-menu">
+                           <!-- Menu -->
+                           <ul class="nk-menu">
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Menu</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'dashboard' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-dashboard"></em></span>
+                                 <span class="nk-menu-text">Account Overview</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Transact</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'deposit' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-credit-card"></em></span>
+                                 <span class="nk-menu-text">Deposit</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'withdrawal' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-piggy-bank"></em></span>
+                                 <span class="nk-menu-text">Withdraw</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'transfer_funds' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-send"></em></span>
+                                 <span class="nk-menu-text">Transfer Funds</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">View Portfolio</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'portfolio' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-stats"></em></span>
+                                 <span class="nk-menu-text">Portfolio</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Request Loan</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'loan' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-briefcase"></em></span>
+                                 <span class="nk-menu-text">Loans & Credit</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">History</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'history' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-cloud"></em></span>
+                                 <span class="nk-menu-text">Account History</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'myreferals' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                 <span class="nk-menu-text">Referrals</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="settings" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-cog"></em></span>
+                                 <span class="nk-menu-text">Settings</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-heading">
+                                 <h6 class="overline-title">Exit</h6>
+                              </li>
+                              <li class="nk-menu-item">
+                                 <a href="{% url 'logout' %}" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-off"></em></span>
+                                 <span class="nk-menu-text">Log Out</span>
+                                 </a>
+                              </li>
+                           </ul>
+                           <!-- .nk-menu -->
+                        </div>
+                        <!-- .nk-sidebar-widget -->
+                        <div class="nk-sidebar-footer">
+                           <ul class="nk-menu nk-menu-footer">
+                              <li class="nk-menu-item">
+                                 <a href="" class="nk-menu-link">
+                                 <span class="nk-menu-icon"><em class="glyphicon glyphicon-help-alt"></em></span>
+                                 <span class="nk-menu-text">Support@ArkVentureAssets.com</span>
+                                 </a>
+                              </li>
+                              <li class="nk-menu-item ml-auto">
+                                 <div class="dropup">
+                                    <a href="#" class="nk-menu-link dropdown-indicator has-indicator" data-toggle="dropdown" data-offset="0,10">
+                                    <span class="nk-menu-icon"><em class="glyphicon glyphicon-globe"></em></span>
+                                    <span class="nk-menu-text">English</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                       <ul class="language-list">
+                                          <li>
+                                             <div id="google_translate_element"></div>
+                                             <script data-cfasync="false" src=""></script>
+                                             <script type="text/javascript">
+                                                function googleTranslateElementInit() {
+                                                    new google.translate.TranslateElement({pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, "google_translate_element");
+                                                        }
+                                             </script>
+                                             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                           <!-- .nk-footer-menu -->
+                        </div>
+                        <!-- .nk-sidebar-footer -->
+                     </div>
+                     <!-- .nk-sidebar-content -->
+                  </div>
+                  <!-- .nk-sidebar-body -->
+               </div>
+               <!-- .nk-sidebar-element -->
+            </div>
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+               <!-- main header @s -->
+               <div class="nk-header nk-header-fluid nk-header-fixed is-light">
+                  <div class="container-fluid">
+                     <div class="nk-header-wrap">
+                        <div class="nk-menu-trigger d-xl-none ml-n1">
+                           <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="glyphicon glyphicon-menu"></em></a>
+                        </div>
+                        <div class="nk-header-brand d-xl-none">
+                           <a href="dashboard" class="logo-link">
+                           <img class="logo-light logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %} 2x" alt="logo">
+                           <img class="logo-dark logo-img" src="{% static 'logo.png' %}" srcset="{% static 'logo.png' %}" alt="logo-dark">
+                           <span class="nio-version">Ark Venture Assets</span>
+                           </a>
+                        </div>
+                        <div class="nk-header-tools">
+                           <ul class="nk-quick-nav">
+                              <li class="dropdown user-dropdown">
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <div class="user-toggle">
+                                       <div class="user-avatar sm">
+                                          <em class="glyphicon glyphicon-user"></em>
+                                       </div>
+                                       <div class="user-info d-none d-md-block">
+                                          <div class="user-status user-status-verified">Verified account</div>
+                                          <div class="user-name dropdown-indicator">{{ request.user.username }}</div>
+                                       </div>
+                                    </div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                       <div class="user-card">
+                                          <div class="user-avatar">
+                                             <span>
+                                             {{request.user.username}}                                                        </span>
+                                          </div>
+                                          <div class="user-info">
+                                             <span class="lead-text">{{request.user.username}} </span>
+                                             <span class="sub-text">{{request.user.email}} </span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="dropdown-inner user-account-info">
+                                       <h6 class="overline-title-alt">ASPEN-FM Investment Account</h6>
+                                       <div class="user-balance">{{ request.user.client.balance }} <small class="currency currency-btc">USD</small></div>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-user"></em><span>Profile</span></a></li>
+                                          <li><a href="{% url 'account_settings' %}"><em class="glyphicon glyphicon-cog"></em><span>Account Settings</span></a></li>
+                                          <li><a class="dark-switch" href="#"><em class="glyphicon glyphicon-adjust"></em><span>Dark Mode</span></a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                       <ul class="link-list">
+                                          <li><a href="{% url 'logout' %}"><em class="glyphicon glyphicon-off"></em><span>Sign out</span></a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </li>
+                              <li class="dropdown notification-dropdown mr-n1">
+                                 <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                    <div class="icon-status icon-status-info"><em class="glyphicon glyphicon-bell"></em></div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
+                                    <div class="dropdown-head">
+                                       <span class="sub-title nk-dropdown-title">Notifications</span>
+                                    </div>
+                                    <div class="dropdown-body">
+                                       <div class="nk-notification">
+                                          <div class="nk-notification-item dropdown-inner">
+                                             <div class="nk-notification-icon">
+                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                             </div>
+                                             <div class="nk-notification-content">
+                                                <div class="nk-notification-text">You have created a <span>Ark Venture Assets</span> account</div>
+                                                <div class="nk-notification-time">{{request.user.date_joined}}</div>
+                                             </div>
+                                          </div>
+                                          <!-- .dropdown-inner -->
+                                       </div>
+                                    </div>
+                                    <!-- .nk-dropdown-body -->
+                                    <div class="dropdown-foot center">
+                                       <a href="{% url 'notifications' %}">View All</a>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- main header @e -->
+               <div class="nk-content ">
+                  <div class="container-fluid">
+                     <div class="nk-content-inner">
+                        <div class="nk-content-body">
+                           <div class="nk-block-head nk-block-head-sm">
+                              <div class="nk-block-between">
+                                 <div class="nk-block-head-content">
+                                    <h3 class="nk-block-title page-title">Account Dashboard</h3>
+                                    <div class="nk-block-des text-soft">
+                                       <p>Welcome to your Ark Venture Assets dashboard.</p>
+                                    </div>
+                                 </div>
+                                 <div class="nk-block-head-content">
+                                    <div class="toggle-wrap nk-block-tools-toggle">
+                                       <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu">
+                                       <em class="icon ni ni-more-v"></em></a>
+                                       <div class="toggle-expand-content" data-content="pageMenu">
+                                          <ul class="nk-block-tools g-3">
+                                             <li><a href="#" data-toggle="modal" data-target="#payModal" class="btn btn-white btn-dim btn-outline-primary"><em class="glyphicon glyphicon-credit-card"></em><span>Deposit Funds</span></a></li>
+                                             <li><a href="#"  data-toggle="modal" data-target="#transferModal" class="btn btn-white btn-dim btn-outline-primary"><em class="glyphicon glyphicon-send"></em><span>Transfer Funds</span></a></li>
+                                             <li><a href="#" data-toggle="modal" data-target="#compoundModal"  class="btn btn-white btn-dim btn-outline-primary"><em class="glyphicon glyphicon-piggy-bank"></em><span>Withdraw Funds</span></a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="nk-block">
+                              <div class="row g-gs">
+                                 <div class="col-md-4 col-sm-6" style="background-color: green; color: #ffffff;">
+                                    <div class = "nk-block">
+                                       <div class="card card-bordered">
+                                          <div class="nk-wgw">
+                                             <div class="nk-wgw-inner">
+                                                <a class="nk-wgw-name" href="#">
+                                                   <div class="nk-wgw-icon is-default">
+                                                      <em class="glyphicon glyphicon-usd"></em>
+                                                   </div>
+                                                   <h5 class="nk-wgw-title title">Account Bal</h5>
+                                                </a>
+                                                <div class="nk-wgw-balance">
+                                                   <div class="amount-sm">$ 
+                                                      {{client_bal}}                                                                <span class="currency currency-usd">USD</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="nk-wgw-actions">
+                                                <ul>
+                                                   <li><a href="#" data-toggle="modal" data-target="#payModal"><em class="glyphicon glyphicon-usd"></em><span>Add Funds</span></a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-4 col-sm-6" style="background-color: green; color: #ffffff;">
+                                    <div class = "nk-block">
+                                       <div class="card card-bordered">
+                                          <div class="nk-wgw">
+                                             <div class="nk-wgw-inner">
+                                                <a class="nk-wgw-name" href="#">
+                                                   <div class="nk-wgw-icon is-default">
+                                                      <em class="glyphicon glyphicon-usd"></em>
+                                                   </div>
+                                                   <h5 class="nk-wgw-title title">Principal</h5>
+                                                </a>
+                                                <div class="nk-wgw-balance">
+                                                   <div class="amount-sm">$ 
+                                                      {{client_deposit}}                                                                <span class="currency currency-usd">USD</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="nk-wgw-actions">
+                                                <ul>
+                                                   <li><a href="#" data-toggle="modal" data-target="#payModal"><em class="glyphicon glyphicon-usd"></em><span>Add Funds</span></a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-4 col-sm-6" style="background-color: green; color: #ffffff;">
+                                    <div class = "nk-block">
+                                       <div class="card card-bordered">
+                                          <div class="nk-wgw">
+                                             <div class="nk-wgw-inner">
+                                                <a class="nk-wgw-name" href="#">
+                                                   <div class="nk-wgw-icon is-default">
+                                                      <em class="glyphicon glyphicon-usd"></em>
+                                                   </div>
+                                                   <h5 class="nk-wgw-title title">Profit</h5>
+                                                </a>
+                                                <div class="nk-wgw-balance">
+                                                   <div class="amount-sm">$ 
+                                                      {{client_profit}}                                                               <span class="currency currency-usd">USD</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="nk-wgw-actions">
+                                                <ul>
+                                                   <li><a href="#" data-toggle="modal" data-target="#payModal"><em class="glyphicon glyphicon-usd"></em><span>Add Funds</span></a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-12">
+                                    <div class="nk-block">
+                                       <div class="nk-news card card-bordered">
+                                          <div class="card-inner">
+                                             <div class="nk-news-list">
+                                                <a class="nk-news-item" href="#">
+                                                   <div class="nk-news-icon"><em class="glyphicon glyphicon-star"></em></div>
+                                                   <div>
+                                                      <p><span> Your current investor status: </span> 
+                                                         <b>{{client_investment_plan_name}}</b>                                                          
+                                                      </p>
+                                                   </div>
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-8">
+                                    <form action="https://ArkVentureAssets.com/Main/withdrawFunds" method="post" accept-charset="utf-8">
+                                       <div class="card card-bordered card-preview">
+                                          <div class="card-inner">
+                                             <div class="preview-block" data-select2-id="26">
+                                                <span class="preview-title-lg overline-title">Withdraw Funds</span>
+                                                <div class="row gy-4">
+                                                   <div class="col-lg-12 col-sm-6">
+                                                      <div class="form-group">
+                                                         <div class="form-control-wrap">
+                                                            <input type = "hidden" name = "reffBal" value = "2000"/>
+                                                            <input type = "hidden" name = "profitBal" value = "13166"/>                                                                           <input type="number" class="form-control form-control-xl form-control-outlined" id="outlined-normal" placeholder = "eg 400" required name = "withdrawAmount" min = "10"/>
+                                                            <label class="form-label-outlined" for="outlined-normal">Enter USD amount</label>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-lg-12 col-sm-6">
+                                                      <div class="form-group">
+                                                         <div class="form-control-wrap">
+                                                            <select class="form-select " data-ui="xl" id="outlined-select2" tabindex="-1" aria-hidden="true" name = "balanceSelect">
+                                                               <option value="default_option" selected>Select balance to withdraw from</option>
+                                                               <option value="profitBal" >Profits Balance </option>
+                                                               <option value="refBal" >Referral Balance </option>
+                                                            </select>
+                                                            <label class="form-label-outlined" for="outlined-select">Withdraw From</label>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-lg-12 col-sm-6">
+                                                      <div class="form-group">
+                                                         <div class="form-control-wrap">
+                                                            <select class="form-select js-select2 select2-hidden-accessible" data-ui="xl" id="outlined-select" data-select2-id="outlined-select" tabindex="-1" aria-hidden="true" name = "withdrawLocation" onchange="yesnoCheck(this);">
+                                                               <option value=" ">Select an option</option>
+                                                               <option value="wallBall">Wallet Balance (USDT)</option>
+                                                               <option value="extAdd">External Address </option>
+                                                            </select>
+                                                            <label class="form-label-outlined" for="outlined-select">Withdraw To</label>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="col-lg-12 col-sm-6" id="showDiv" style="display: none;">
+                                                      <input type="text" class="form-control form-control-xl form-control-outlined"  placeholder = "enter address..." name = "withAddy"/>
+                                                      <label class="form-label-outlined" for="outlined-normal">Enter Receiving Address</label>
+                                                   </div>
+                                                   <script>
+                                                      function yesnoCheck(that) {
+                                                          if (that.value == "extAdd") {
+                                                        
+                                                              document.getElementById("showDiv").style.display = "block";
+                                                          } else {
+                                                              document.getElementById("showDiv").style.display = "none";
+                                                          }
+                                                      }
+                                                   </script>
+                                                </div>
+                                                <br/>
+                                                <button type = "submit" class = "btn btn-success btn-block">Withdraw Funds</button>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- footer @s -->
+               <div class="nk-footer nk-footer-fluid">
+                  <div class="container-fluid">
+                     <div class="nk-footer-wrap">
+                        <div class="nk-footer-copyright"> &copy; 2023 Ark Venture Assets. All rights reserved
+                        </div>
+                        <div class="nk-footer-links">
+                           <ul class="nav nav-sm">
+                              <li class="nav-item"><a class="nav-link" href="{% url 'terms' %}" target="_blank">Terms</a></li>
+                              <li class="nav-item"><a class="nav-link" href="{% url 'privacy' %}" target="_blank">Privacy</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- footer @e -->
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" tabindex="-1" id="payModal" role="dialog"
+         aria-labelledby="payModal" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Fund your Managed Portfolio</h5>
+                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                  <em class="icon ni ni-cross"></em>
+                  </a>
+               </div>
+               <div class="modal-body">
+                  <form action="" method="post" accept-charset="utf-8">
+                     <label>Enter amount you are about to fund with (in USD)</label>
+                     <input type = "number" name = "usdAmount" class = "form-control" placeholder = "enter usd amount to be paid..." min = "100" />  
+                     <br/><br/>
+                     <div class="form-group">
+                        <div class="form-control-wrap">
+                           <select class="form-select form-control form-control-xl" data-ui="xl" name = "coinSelect" required onchange="showCode(this);">
+                              <option value="">Select...</option>
+                              <option value="btc" id = "btcChoose">Bitcoin (BTC)</option>
+                              <option value="eth" id = "ethChoose">Ethereum (ETH)</option>
+                              <option value="usdt" id = "usdtChoose">Tether (USDT-ERC20)</option>
+                           </select>
+                           <label class="form-label-outlined" for="outlined-select">Select a payment type: </label>
+                           <br/><br/>
+                           <div id = "showBTCBarcode" align = "center" style="display: none;">
+                              <img src = "https://chart.googleapis.com/chart?chs=350x330&cht=qr&chl=bc1q53yvtzk9pudl70av94us9ady62573wzxcrcqr5" style = "width:350px;height:330px;" class = "image-responsive"/>
+                              <br/>OR COPY
+                              <br/>
+                              <b><u>bc1q53yvtzk9pudl70av94us9ady62573wzxcrcqr5</u></b>
+                           </div>
+                           <div id = "showETHBarcode" align = "center" style="display: none;">
+                              <img src = "https://chart.googleapis.com/chart?chs=350x330&cht=qr&chl=0x0d04d763Bc3d22d429B36a103b3344fd64E7E638" style = "width:350px;height:330px;" class = "image-responsive"/>
+                              <br/>OR COPY
+                              <br/>
+                              <b><u>0x0d04d763Bc3d22d429B36a103b3344fd64E7E638</u></b>
+                           </div>
+                           <div id = "showUSDTBarcode" align = "center" style="display: none;">
+                              <img src = "https://chart.googleapis.com/chart?chs=350x330&cht=qr&chl=0x0d04d763Bc3d22d429B36a103b3344fd64E7E638" style = "width:350px;height:330px;" class = "image-responsive"/>
+                              <br/>OR COPY
+                              <br/>
+                              <b><u>0x0d04d763Bc3d22d429B36a103b3344fd64E7E638</u></b>
+                           </div>
+                           <script>
+                              function showCode(nameSelect){
+                                  console.log(nameSelect);
+                                      if(nameSelect){
+                                          admOptionValue = document.getElementById("btcChoose").value;
+                                          if(admOptionValue == nameSelect.value){
+                                              document.getElementById("showBTCBarcode").style.display = "block";
+                                          }
+                                          else{
+                                              document.getElementById("showBTCBarcode").style.display = "none";
+                                          }
+                                      }
+                                      else{
+                                          document.getElementById("showBTCBarcode").style.display = "none";
+                                      }
+                                      
+                                      if(nameSelect){
+                                          admOptionValue = document.getElementById("ethChoose").value;
+                                          if(admOptionValue == nameSelect.value){
+                                              document.getElementById("showETHBarcode").style.display = "block";
+                                          }
+                                          else{
+                                              document.getElementById("showETHBarcode").style.display = "none";
+                                          }
+                                      }
+                                      else{
+                                          document.getElementById("showETHBarcode").style.display = "none";
+                                      }
+                                      
+                                      if(nameSelect){
+                                          admOptionValue = document.getElementById("usdtChoose").value;
+                                          if(admOptionValue == nameSelect.value){
+                                              document.getElementById("showUSDTBarcode").style.display = "block";
+                                          }
+                                          else{
+                                              document.getElementById("showUSDTBarcode").style.display = "none";
+                                          }
+                                      }
+                                      else{
+                                          document.getElementById("showUSDTBarcode").style.display = "none";
+                                      }
+                                      
+                                      
+                              }
+                           </script>
+                           <br/><br/>
+                           <button type = "submit" class = "btn btn-success btn-block "><em class = "fa fa-check"></em>Payment Has been Sent</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer bg-light">
+                  <span class="sub-text">Feel free to contact us via live chat for support related issues.</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" tabindex="-1" id="transferModal" role="dialog"
+         aria-labelledby="payModal" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Transfer Funds</h5>
+                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                  <em class="icon ni ni-cross"></em>
+                  </a>
+               </div>
+               <div class="modal-body">
+                  <form action="https://ArkVentureAssets.com/Main/transferFunding" method="post" accept-charset="utf-8">
+                     <label>Transfer From</label>
+                     <div class="form-group">
+                        <div class="form-control-wrap">
+                           <select class="form-select form-control form-control-xl" data-ui="xl" name = "walletBal" required>
+                              <option value="">Select...</option>
+                              <option value="btc">Wallet Balance</option>
+                              <!--<option value="eth">Portfolio Balance</option>-->
+                           </select>
+                           <label class="form-label-outlined" for="outlined-select">Transfer From </label>
+                        </div>
+                        <br/>
+                        <label>Enter amount to transfer (in USD)</label>
+                        <input type = "number" name = "usdAmount" class = "form-control" placeholder = "enter usd amount to transfer..." min = "10"  required/>  
+                        <br/><br/>
+                        <div class="form-control-wrap">
+                           <select class="form-select form-control form-control-xl" data-ui="xl" name = "portVal" required>
+                              <option value="">Select...</option>
+                              <option value="portBal">Portfolio Balance</option>
+                              <!--<option value="eth">Wallet Balance</option>-->
+                           </select>
+                           <label class="form-label-outlined" for="outlined-select">Transfer To </label>
+                        </div>
+                     </div>
+                     <button type = "submit" class = "btn btn-success btn-block ">Transfer Funds</button>
+                  </form>
+               </div>
+               <div class="modal-footer bg-light">
+                  <span class="sub-text">Powered By Ark Venture Assets Systems</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" tabindex="-1" id="compoundModal" role="dialog"
+         aria-labelledby="payModal" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Compound your Earnings</h5>
+                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                  <em class="icon ni ni-cross"></em>
+                  </a>
+               </div>
+               <div class="modal-body">
+                  <form action="https://ArkVentureAssets.com/Main/compoundEarnings" method="post" accept-charset="utf-8">
+                     <select class="form-select form-control form-control-xl" data-ui="xl" name = "balanceChoose" required>
+                        <option value="">Select...</option>
+                        <option value="profit">Current Dividends</option>
+                        <option value="referral">Referral Balance</option>
+                     </select>
+                     <label class="form-label-outlined" for="outlined-select">Select balance to compound: </label>
+                     <br/><br/>
+                     <label>Enter amount you want to compound (in USD)</label>
+                     <input type = "hidden" name = "refBal" value = "2000"/>
+                     <input type = "hidden" name = "curBal" value = "13166"/>                                <input type = "number" name = "usdAmount" class = "form-control" placeholder = "enter usd amount" min = "100" required/>  
+                     <br/><br/>
+                     <div class="form-group">
+                        <button type = "submit" class = "btn btn-success btn-block "><em class = "fa fa-database"></em>Compound Earnings</button>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer bg-light">
+                  <span class="sub-text">Feel free to contact us via live chat for support related issues.</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         function engageConversion() {
+                 var cryptoSelect = document.getElementById("cryptoSelect");
+                 var usdAmt = document.getElementById('usdAmount').value;
+                 var cryptoVal = document.getElementById('cryptoValue');
+                             
+                 if(document.getElementById("cryptoSelect").value == "btc"){
+                                     var curRate = 37700;
+                 }else if(document.getElementById("cryptoSelect").value == "eth"){
+                                     var curRate = 2103.01;
+                 }else if(document.getElementById("cryptoSelect").value == "bch"){
+                                     var curRate = 226;
+                 }else if(document.getElementById("cryptoSelect").value == "bnb"){
+                                     var curRate = 235;
+                 }else if(document.getElementById("cryptoSelect").value == "usdt"){
+                                     var curRate = 1.0002;
+                 }else{
+                     var curRate = 0;
+                 } 
+                 
+                 var vResult = usdAmt / curRate;
+                 var roundedFig = vResult.toFixed(4);
+                 document.getElementById('cryptoValue').value = roundedFig;
+                             
+         }
+             
+          
+      </script>
+      <script>
+         if(localStorage.getItem('isDarkMode') === 'enabled'){
+           
+             document.getElementById('darkSwitch').classList.add('dark-mode');
+         }
+      </script>
+      <!-- Modal Form -->
+      <div class="modal fade" tabindex="-1" id="sendFunds">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Send Funds To Address </h5>
+                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                  <em class="icon ni ni-cross"></em>
+                  </a>
+               </div>
+               <div class="modal-body">
+                  <div id = "showRate"></div>
+                  <form action="" class="form-validate is-alter" method = "POST" name = "sendForm">
+                     <div class="form-group">
+                        <div class = "alert alert-dark alert-fill">When sending Tether (USDT), ensure you have received a minimum of 15TRX ($1) for gas fee, to enable sending of funds to your designated address.</div>
+                        <label class="form-label">Select Crypto</label>
+                        <div class="form-control-wrap">
+                           <select class="form-select form-control form-control-lg" data-search="on" name = "cryptoSelect" required id = "cryptoSelect">
+                              <option value="usdt">Tether (USDT - TRC20 only)</option>
+                              <option value="btc">Bitcoin (BTC)</option>
+                              <option value="eth">Ethereum (ETH - ERC20 only)</option>
+                              <option value="bch">Bitcoin-Cash (BCH)</option>
+                              <option value="bnb">Binance Coin (BNB - BEP20 only)</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class = "row">
+                        <div class = "col-lg-6">
+                           <div class="form-group">
+                              <label class="form-label" for="default-05">Amount in usd</label>
+                              <div class="form-control-wrap">
+                                 <div class="form-text-hint">
+                                    <span class="overline-title">Usd</span>
+                                 </div>
+                                 <input type="text" class="form-control in"  placeholder="eg 0.00" id = "usdAmount" name = "usdAmount" required oninput = "engageConversion();">
+                              </div>
+                           </div>
+                        </div>
+                        <div class = "col-lg-6">
+                           <div class="form-group">
+                              <label class="form-label" for="phone-no">Amount in crypto</label>
+                              <div class="form-control-wrap">
+                                 <div class="form-text-hint">
+                                    <span id class="overline-title">-</span>
+                                 </div>
+                                 <input type="text" class="form-control out" id="cryptoValue"  value = "0" readonly name = "cryptoValue">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <br/>
+                     <div class="form-group">
+                        <label class="form-label" for="pay-amount">Receiving Address</label>
+                        <div class="form-control-wrap">
+                           <input type="text" placeholder = "enter receiving address here..." class="form-control" name = "recAdd" required>
+                        </div>
+                        <small style = "color:red;">always ensure the network matches the receiving address, funds cannot be reversed after sending.</small>
+                        <hr/>
+                     </div>
+                     <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary">Send Funds</button>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer bg-light">
+                  <span class="sub-text">Powered By Ark Venture Assets Systems</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" tabindex="-1" id="receiveFunds">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Receive Funds To Account</h5>
+                  <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                  <em class="icon ni ni-cross"></em>
+                  </a>
+               </div>
+               <div class="modal-body">
+                  <form action="" class="form-validate is-alter" id = "receiveForm">
+                     <div class="form-group">
+                        <label class="form-label">Select Crypto To Receive In:</label>
+                        <div class="form-control-wrap">
+                           <select class="form-select form-control form-control-lg" data-search="on" id = "cryptoType">
+                              <option selected value="">Select a Crypto</option>
+                              <option value="usdt">Tether (USDT - TRC20)</option>
+                              <option value="btc">Bitcoin (BTC)</option>
+                              <option value="eth">Ethereum (ETH - ERC20)</option>
+                              <option value="bch">Bitcoin-Cash (BCH)</option>
+                              <option value="bnb">Binance Coin (BNB - BEP20)</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <button type="submit" id = "recBtn" class="btn btn-lg btn-primary">Generate Address</button>
+                     </div>
+                  </form>
+                  <hr/>
+                  <div class = "currentInfo"></div>
+               </div>
+               <div class="modal-footer bg-light">
+                  <span class="sub-text">Powered By Ark Venture Assets Systems</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         $(document).ready(function () {
+           $("#recBtn").click(function (e) {
+             e.preventDefault();
+             var cryptoType = $("#cryptoType").val();
+             
+             $.ajax
+               ({
+                 type: "POST",
+                 url: "Main/generateAdd",
+                 data: { "cryptoType": cryptoType },
+                 success: function (data) {
+                   $(".currentInfo").html(data);
+                   $("#receiveForm")[0].reset();
+                 }
+               });
+               
+           });
+         });
+      </script>
+      <script>
+         function updateSpend(){
+         var tester = Math.random();
+          $.ajax({
+           url: "Main/updateSpendRest",
+           type: "POST",
+           success: function(data){
+            //alert(data);
+           },
+           complete:function(data){
+            setTimeout(updateSpend,25000);
+           }
+          });
+         }
+         
+         $(document).ready(function(){
+          setTimeout(updateSpend,25000);
+         });
+         
+      </script>
+      <script src="{% static 'dashboardtwo/bundle.js' %}"></script>
+      <script src="{% static 'dashboardtwo/scripts.js' %}"></script>
+      <script src="https://www.cryptohopper.com/widgets/js/script"></script>
+   </body>
+</html>

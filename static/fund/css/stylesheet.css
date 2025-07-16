@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Regular.woff2') format('woff2'),
+        url('../fonts/Brother-1816-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Medium.woff2') format('woff2'),
+        url('../fonts/Brother-1816-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Medium-Italic.woff2') format('woff2'),
+        url('../fonts/Brother-1816-Medium-Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Regular-Italic.woff2') format('woff2'),
+        url('../fonts/Brother-1816-Regular-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-ExtraBold.woff2') format('woff2'),
+        url('../fonts/Brother-1816-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Bold.woff2') format('woff2'),
+    url('../fonts/Brother-1816-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Light.woff2') format('woff2'),
+    url('../fonts/Brother-1816-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Brother 1816';
+    src: url('../fonts/Brother-1816-Black.woff2') format('woff2'),
+    url('../fonts/Brother-1816-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CaeciliaLTPro';
+    src: url('../fonts/CaeciliaLTPro-55Roman.woff2') format('woff2'),
+        url('../fonts/CaeciliaLTPro-55Roman.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CaeciliaLTPro';
+    src: url('../fonts/CaeciliaLTPro-45Light.woff2') format('woff2'),
+        url('../fonts/CaeciliaLTPro-45Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CaeciliaLTPro';
+    src: url('../fonts/CaeciliaLTPro-85Heavy.woff2') format('woff2'),
+        url('../fonts/CaeciliaLTPro-85Heavy.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'CaeciliaLTPro';
+    src: url('../fonts/CaeciliaLTPro-75Bold.woff2') format('woff2'),
+        url('../fonts/CaeciliaLTPro-75Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

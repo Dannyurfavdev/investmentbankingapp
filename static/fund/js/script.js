@@ -1,0 +1,7 @@
+jQuery(document).ready(function(){jQuery('.fund-premium-discount-date-selector').on('change',function(){const _this=jQuery(this).find('option:selected');const qtr=_this.data('qtr');const year=_this.data('year');const pid=_this.parent().data('pid');if(!pid){return true;}
+jQuery.ajax({url:script_args_single_fund.ajaxUrl,method:'POST',data:{action:'update_fund_premium_discount',pid:pid,qtr:qtr,year:year,},success:function(responseData){if(responseData.html&&responseData.html.length>0){jQuery('.fund-premium-discount-section').html(responseData.html);}
+initFundPremiumDiscountChart(responseData.fundData);}});});jQuery('.fund-performance-date-selector').on('change',function(){const _this=jQuery(this).find('option:selected');const pid=_this.parent().data('pid');let activeTab=''
+_this.parents('.b-tabs-nav_row').find('li').each(function(index,element){let tabItem=jQuery(element).find('a')
+if(tabItem.hasClass('active')){activeTab=tabItem.attr('href')}})
+if(!pid){return true;}
+jQuery.ajax({url:script_args_single_fund.ajaxUrl,method:'POST',data:{action:'update_fund_performance',pid:pid,active_tab:activeTab,dateRange:_this.val()},success:function(responseData){if(responseData.html&&responseData.html.length>0){const sectionElement=jQuery('.fund-performance-section');sectionElement.html('').html(responseData.html);sectionElement.closest('.b-funds-block').find('.b-date__text').html('').html('As of '+responseData.asofdate);}}});});});
